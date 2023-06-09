@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Minimal realisation app on Ruby on Rails API and framework Vue.js for OpenAI engine gpt-3.5-turbo.
 
-Things you may want to cover:
+Create file config/secret.yml  
 
-* Ruby version
+development:
+  openai_api_key: 'You api key'
 
-* System dependencies
+test:
+  openai_api_key: 'You api key'
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+production:
+  openai_api_key: <%= ENV['OPENAI_API_KEY'] %>
