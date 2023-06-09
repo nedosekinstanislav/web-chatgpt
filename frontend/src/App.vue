@@ -10,6 +10,12 @@
         rows="1"
     />
     <button @click="sendQuestion">send</button>
+    <div
+      v-for="answer in listAnswers"
+      :key="answer"
+    >
+    {{ answer }}
+    </div>
   </div>
 </template>
 
@@ -19,14 +25,13 @@ export default {
     return {
       question: '',
       answer: '',
+      listAnswers: [],
       api_url: 'http://localhost:3000/chats',
     }
   },
   methods: {
     async sendQuestion () {
       try {
-        // const response = await axios.post('/api/questions', { question: this.questionText });
-        // this.answerText = response.data.answer;
         const response = await fetch(this.api_url, {
           method: 'POST',
           headers: {
@@ -34,11 +39,12 @@ export default {
           },
           body: JSON.stringify({
             question: this.question
-
           })
         })
-        this.question = await response.json();
-        console.log(this.question);
+        let dataAnswer = await response.json();
+        this.answer = dataAnswer.answer;
+        this.listAnswers.push(this.answer);
+        this.question = '';
       } catch (error) {
         console.log('Send question', error);
       }
